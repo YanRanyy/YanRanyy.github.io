@@ -1,0 +1,249 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>YOLOv5使用 | 嫣然云雨的个人博客</title><meta name="author" content="YanRanyy"><meta name="copyright" content="YanRanyy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="YOLOv5模型使用教程(待更)安装与改各种东西1:前往Anaconda.rog安装Anaconda,这是一个python环境隔离工具 2:在github下载YOLOv5源码，这里推荐6.0版本 3:在安装Anaconda的时候，有4个小方框的地方要勾选1 2 4选项，这是安装环境配置，如果不勾选，后续自己添加非常非常非常非常非常麻烦 4:解压YOLOv5，然后打开requirements.txt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="YOLOv5使用">
+<meta property="og:url" content="http://example.com/2024/11/26/YOLOv5%E6%A8%A1%E5%9E%8B%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="嫣然云雨的个人博客">
+<meta property="og:description" content="YOLOv5模型使用教程(待更)安装与改各种东西1:前往Anaconda.rog安装Anaconda,这是一个python环境隔离工具 2:在github下载YOLOv5源码，这里推荐6.0版本 3:在安装Anaconda的时候，有4个小方框的地方要勾选1 2 4选项，这是安装环境配置，如果不勾选，后续自己添加非常非常非常非常非常麻烦 4:解压YOLOv5，然后打开requirements.txt">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/yanranyy.jpg">
+<meta property="article:published_time" content="2024-11-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-11-26T09:37:03.801Z">
+<meta property="article:author" content="YanRanyy">
+<meta property="article:tag" content="YOLO">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/yanranyy.jpg"><link rel="shortcut icon" href="/img/yanranyy.jpg"><link rel="canonical" href="http://example.com/2024/11/26/YOLOv5%E6%A8%A1%E5%9E%8B%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'YOLOv5使用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-11-26 17:37:03'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 7.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/yanranyy.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/mlss.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="嫣然云雨的个人博客"><span class="site-name">嫣然云雨的个人博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">YOLOv5使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-11-25T16:00:00.000Z" title="发表于 2024-11-26 00:00:00">2024-11-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-11-26T09:37:03.801Z" title="更新于 2024-11-26 17:37:03">2024-11-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="YOLOv5使用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="YOLOv5模型使用教程-待更"><a href="#YOLOv5模型使用教程-待更" class="headerlink" title="YOLOv5模型使用教程(待更)"></a>YOLOv5模型使用教程(待更)</h1><h2 id="安装与改各种东西"><a href="#安装与改各种东西" class="headerlink" title="安装与改各种东西"></a>安装与改各种东西</h2><p>1:前往Anaconda.rog安装Anaconda,这是一个python环境隔离工具</p>
+<p>2:在github下载YOLOv5源码，这里推荐6.0版本</p>
+<p>3:在安装Anaconda的时候，有4个小方框的地方要勾选1 2 4选项，这是安装环境配置，如果不勾选，后续自己添加非常非常非常非常非常麻烦</p>
+<p>4:解压YOLOv5，然后打开requirements.txt,把依赖的库版本&gt;&#x3D;全改成&#x3D;&#x3D;</p>
+<p>如图:<img src="C:\Users\云雨\Pictures\QQ20241016-183702.png" alt="QQ20241016-183702"></p>
+<p>5:打开cmd控制台，输入conda env list   如果没创建过项目，那只会出现base</p>
+<p>接下来再输入conda create -n yolo_v5 python&#x3D;3.8   (python的3.8最稳定)</p>
+<p>然后在安装过程中要求选择Proceed([y]&#x2F;n)?  全选择y就行</p>
+<p>然后输入conda activate yolo_v5</p>
+<p>然后用cd指令转去你解压的YOLOv5-6.0的文件夹地址，如果提示文件名、目录名或卷标语法不正确，那就改成cd&#x2F;d 地址</p>
+<p>6:先别关控制台，然后我们先去下载一个pyTorch插件(地址:pytorch.org)</p>
+<p>然后注意到，我们的requirements里面有提到，要使用torch&#x3D;&#x3D;1.7.0的版本，如果直接使用pyTorch的最新2.0版本肯定是会报错的，所以我们要去翻历史版本</p>
+<h3 id="这里不得不提到说是1-7-0，但还是得用1-8-1"><a href="#这里不得不提到说是1-7-0，但还是得用1-8-1" class="headerlink" title="这里不得不提到说是1.7.0，但还是得用1.8.1"></a>这里不得不提到说是1.7.0，但还是得用1.8.1</h3><p>然后我们翻到历史版本的</p>
+<p><img src="C:\Users\云雨\Pictures\QQ_1729075622947.png" alt="QQ_1729075622947"></p>
+<p>如果你是30系及以上的显卡，那就按11.1，如果配置比较低，那就试试后面这几个</p>
+<p>直接复制这个:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html</span><br></pre></td></tr></table></figure>
+
+<p>到之前的cmd控制台，一定要在(yolov5)环境里面安装，才能够成功<img src="C:\Users\云雨\Pictures\QQ20241016-185058.png" alt="QQ20241016-185058"></p>
+<p>如果成功了，那就会出现这个界面，要下蛮久的，如果之前有安装过，那会直接检测到就拿过来用了，如果中途中断了的话，就要重新开始下</p>
+<p>如果无论怎么换源你的网速都很慢，那就挂个梯子然后在pip指令后面加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--proxy http://127.0.0.1:本地端口</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果下载途中经常下一半就报错一大片红色代码，就试试把</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install</span><br></pre></td></tr></table></figure>
+
+<p>改成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip --default-timeout=100 install</span><br></pre></td></tr></table></figure>
+
+<p>下载完成后会提示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Installing collected packages: typing-extensions, pillow, numpy, torch, torchvision, torchaudio</span><br><span class="line">Successfully installed numpy-1.24.4 pillow-10.4.0 torch-1.8.1+cu111 torchaudio-0.8.1 torchvision-0.9.1+cu111 typing-extensions-4.12.2</span><br></pre></td></tr></table></figure>
+
+<p>然后我们输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python</span><br></pre></td></tr></table></figure>
+
+<p>进入交互环境，然后输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br></pre></td></tr></table></figure>
+
+<p>如果没报错，那就是成功了，然后输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit()</span><br></pre></td></tr></table></figure>
+
+<p>退出</p>
+<p>回到requirements.txt文档</p>
+<p>把torch和torchvision这两个东西注释掉，因为我们已经手动安装了</p>
+<h3 id="这里提一嘴为什么要手动安装，因为它给的pip下载是下载用cpu训练的，我们用gpu训练得手动去下"><a href="#这里提一嘴为什么要手动安装，因为它给的pip下载是下载用cpu训练的，我们用gpu训练得手动去下" class="headerlink" title="这里提一嘴为什么要手动安装，因为它给的pip下载是下载用cpu训练的，我们用gpu训练得手动去下"></a>这里提一嘴为什么要手动安装，因为它给的pip下载是下载用cpu训练的，我们用gpu训练得手动去下</h3><p>改成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># torch==1.7.0</span><br><span class="line"># torchvision==0.8.1</span><br></pre></td></tr></table></figure>
+
+<p>然后再把opencv改一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opencv-python==4.1.2.30 #(如果没有4.1.2.30就改成尽可能低的版本)</span><br></pre></td></tr></table></figure>
+
+<p>然后去运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p>没有报错安装好依赖就可以下一步了</p>
+<h2 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h2><p>经历了繁琐的安装配置后，终于可以开始训练了QAQ</p>
+<p>我们去vscode(或者你用别的编译器,如果是vscode记得要下载python的拓展)打开刚才解压的YOLOv5文件夹，就可以浏览里边的代码了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">train.py(训练)</span><br><span class="line">val.py(验证)</span><br><span class="line">detect.py(检测)</span><br></pre></td></tr></table></figure>
+
+<p>在vscode里按住Ctrl+Shift+P，然后输入选择解释器，选择python3.8</p>
+<h3 id="数据集获取"><a href="#数据集获取" class="headerlink" title="数据集获取"></a>数据集获取</h3><p>可以登录<a target="_blank" rel="noopener" href="https://huggingface.co/%E7%BD%91%E7%AB%99%E8%8E%B7%E5%8F%96%EF%BC%8C%E6%90%9C%E7%B4%A2object">https://huggingface.co/网站获取，搜索object</a> detect就可以了</p>
+<p>把我们的数据集放在yolo文件夹里的data文件夹里</p>
+<p>注意tarin和val文件夹是必须要有的，里面必须严格按照images和lables来命名文件夹存放图片和标签，images里面放你需要用于训练的图片，lables是训练图片的标签(直接把训练图片的后缀jpg改成txt，名称完全一致就好了)</p>
+<p>处理好数据集后，在YOLOv5文件根目录创建一个py项目，测试能否读取到图片和边框是否正确，我把代码贴在下面</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="comment"># 指定图片路径</span></span><br><span class="line">image_path = <span class="string">&#x27;./data/data_org/train/images/2_py.jpg&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图片</span></span><br><span class="line">image = cv.imread(image_path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查图片是否读取成功</span></span><br><span class="line"><span class="keyword">if</span> image <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;图片未能读取，请检查路径。&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># 在图像上绘制矩形</span></span><br><span class="line">    image = cv.rectangle(image, (<span class="number">78</span>, <span class="number">15</span>), (<span class="number">559</span> + <span class="number">78</span>, <span class="number">622</span> + <span class="number">15</span>), (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 显示图像</span></span><br><span class="line">    cv.imshow(<span class="string">&quot;img&quot;</span>, image)</span><br><span class="line">    <span class="keyword">if</span> cv.waitKey(<span class="number">0</span>) == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">         cv.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+
+
+<p>正常来讲，会出现这种窗口</p>
+<p>–&gt;<img src="C:\Users\云雨\AppData\Local\Temp\QQ_1730725122602.png" alt="img"></p>
+<h3 id="数据集处理思路"><a href="#数据集处理思路" class="headerlink" title="数据集处理思路"></a>数据集处理思路</h3><p>由于我们放入的数据集肯定是一大坨东西，然后只输出一小坨东西</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">YanRanyy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/11/26/YOLOv5%E6%A8%A1%E5%9E%8B%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">http://example.com/2024/11/26/YOLOv5%E6%A8%A1%E5%9E%8B%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">嫣然云雨的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/YOLO/">YOLO</a></div><div class="post_share"><div class="social-share" data-image="/img/yanranyy.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/11/26/%E5%B8%B8%E7%94%A8%E9%95%9C%E5%83%8F%E6%BA%90/" title="常用镜像源"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">常用镜像源</div></div></a></div><div class="next-post pull-right"><a href="/2024/11/26/%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E5%89%8D%E7%BC%80%E5%92%8C/" title="前缀和算法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">前缀和算法</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/yanranyy.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">YanRanyy</div><div class="author-info__description">学习很重要，吃饭也很重要</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/YanRanyy" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:2239972781@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to YanRanyyのBlog!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#YOLOv5%E6%A8%A1%E5%9E%8B%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-%E5%BE%85%E6%9B%B4"><span class="toc-number">1.</span> <span class="toc-text">YOLOv5模型使用教程(待更)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E6%94%B9%E5%90%84%E7%A7%8D%E4%B8%9C%E8%A5%BF"><span class="toc-number">1.1.</span> <span class="toc-text">安装与改各种东西</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%99%E9%87%8C%E4%B8%8D%E5%BE%97%E4%B8%8D%E6%8F%90%E5%88%B0%E8%AF%B4%E6%98%AF1-7-0%EF%BC%8C%E4%BD%86%E8%BF%98%E6%98%AF%E5%BE%97%E7%94%A81-8-1"><span class="toc-number">1.1.1.</span> <span class="toc-text">这里不得不提到说是1.7.0，但还是得用1.8.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%99%E9%87%8C%E6%8F%90%E4%B8%80%E5%98%B4%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85%EF%BC%8C%E5%9B%A0%E4%B8%BA%E5%AE%83%E7%BB%99%E7%9A%84pip%E4%B8%8B%E8%BD%BD%E6%98%AF%E4%B8%8B%E8%BD%BD%E7%94%A8cpu%E8%AE%AD%E7%BB%83%E7%9A%84%EF%BC%8C%E6%88%91%E4%BB%AC%E7%94%A8gpu%E8%AE%AD%E7%BB%83%E5%BE%97%E6%89%8B%E5%8A%A8%E5%8E%BB%E4%B8%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">这里提一嘴为什么要手动安装，因为它给的pip下载是下载用cpu训练的，我们用gpu训练得手动去下</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83"><span class="toc-number">1.2.</span> <span class="toc-text">训练</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E8%8E%B7%E5%8F%96"><span class="toc-number">1.2.1.</span> <span class="toc-text">数据集获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%A4%84%E7%90%86%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.2.</span> <span class="toc-text">数据集处理思路</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/26/Git%E7%9A%84%E4%BD%BF%E7%94%A8/" title="Git使用">Git使用</a><time datetime="2024-11-25T16:00:00.000Z" title="发表于 2024-11-26 00:00:00">2024-11-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/26/%E5%B8%B8%E7%94%A8%E9%95%9C%E5%83%8F%E6%BA%90/" title="常用镜像源">常用镜像源</a><time datetime="2024-11-25T16:00:00.000Z" title="发表于 2024-11-26 00:00:00">2024-11-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/26/YOLOv5%E6%A8%A1%E5%9E%8B%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="YOLOv5使用">YOLOv5使用</a><time datetime="2024-11-25T16:00:00.000Z" title="发表于 2024-11-26 00:00:00">2024-11-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/26/%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E5%89%8D%E7%BC%80%E5%92%8C/" title="前缀和算法">前缀和算法</a><time datetime="2024-11-25T16:00:00.000Z" title="发表于 2024-11-26 00:00:00">2024-11-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/26/KNN%E7%AE%97%E6%B3%95/" title="KNN算法">KNN算法</a><time datetime="2024-11-25T16:00:00.000Z" title="发表于 2024-11-26 00:00:00">2024-11-26</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/mlss.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By YanRanyy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="锟,斤,拷,烫" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
